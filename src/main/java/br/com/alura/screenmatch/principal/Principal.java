@@ -3,6 +3,7 @@ package br.com.alura.screenmatch.principal;
 import br.com.alura.screenmatch.models.DadosEpisodio;
 import br.com.alura.screenmatch.models.DadosSerie;
 import br.com.alura.screenmatch.models.DadosTemporada;
+import br.com.alura.screenmatch.models.Episodio;
 import br.com.alura.screenmatch.service.ConsumoAPI;
 import br.com.alura.screenmatch.service.ConverteDados;
 
@@ -64,6 +65,12 @@ public class Principal {
                 .limit(5)
                 .forEach(System.out::println);
 
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream()
+                        .map(e -> new Episodio(t.numero(), e))
+                ).collect(Collectors.toList());
+
+        episodios.forEach(System.out::println);
     }
 
 }
