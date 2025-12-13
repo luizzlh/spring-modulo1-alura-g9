@@ -98,6 +98,14 @@ public class Principal {
                         Collectors.averagingDouble(Episodio::getAvaliacao)));
         System.out.println(avaliacoesPorTemporada);
 
+        DoubleSummaryStatistics stats = episodios.stream()
+                .filter(episodio -> episodio.getAvaliacao() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+
+        System.out.println("Nota máxima: " + stats.getMax());
+        System.out.println("Nota mínima: " + stats.getMin());
+        System.out.println("Nota média: " + stats.getAverage());
+        System.out.println("Total de episódios: " + stats.getCount());
         //
 //        System.out.println("A partir de que ano você deseja ver os episódios? ");
 //
